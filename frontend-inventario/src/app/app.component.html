@@ -1,0 +1,14 @@
+<nav class="topbar">
+  <div class="topbar__brand">Inventario</div>
+
+  <div class="topbar__links">
+    <a routerLink="/productos" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Productos</a>
+    <a routerLink="/categorias-productos" routerLinkActive="is-active">Categorías</a>
+    <a routerLink="/transacciones" routerLinkActive="is-active">Transacciones</a>
+
+  </div>
+</nav>
+
+<main class="page">
+  <router-outlet></router-outlet>
+</main>
