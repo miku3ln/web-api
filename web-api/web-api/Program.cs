@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using web_api.backend_infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+//builder.Services.AddOpenApi();
 
 // Swagger (OpenAPI + UI)
 builder.Services.AddEndpointsApiExplorer();
@@ -27,6 +29,18 @@ builder.Services.AddDbContext<InventarioDbContext>(options =>
     });
 });
 
+
+// FluentValidation
+builder.Services.AddFluentValidationAutoValidation();
+
+// ✅ CORS ABIERTO (temporal, sin login)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularDev", policy =>
+           policy.WithOrigins("http://localhost:4200")
+                 .AllowAnyHeader()
+                 .AllowAnyMethod());
+});
 var app = builder.Build();
 
 
@@ -38,9 +52,13 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
+
+
+app.UseCors("AngularDev");
+
 
 app.MapControllers();
 
