@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:55161' // TODO CHANGE IIS Express PORT
+  apiUrl: 'http://192.168.0.100:5035' // TODO CHANGE IIS Express PORT
 };
